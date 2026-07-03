@@ -14,5 +14,20 @@ maxSynthPendingDepth = 3
 name = "mathlib"
 scope = "leanprover-community"
 
+[[require]]
+name = "verso-slides"
+git = "https://github.com/leanprover/verso-slides.git"
+rev = "main"
+
 [[lean_lib]]
 name = "LeanCourseSummer26"
+
+[[lean_lib]]
+name = "Lecture1Slides"
+srcDir = "lecture-notes"
+roots = ["Lecture1"]
+
+[[lean_exe]]
+name = "lecture1-slides"
+srcDir = "lecture-notes"
+root = "Main"
