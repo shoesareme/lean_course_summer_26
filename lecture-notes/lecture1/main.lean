@@ -1,12 +1,12 @@
 import VersoSlides
-import Lecture1
+import lecture1.lecture1
 
 open VersoSlides
 
--- Embedded so the generated deck remains self-contained and works offline.
+-- Embed the shared course theme so the generated deck remains styled and works offline.
 def lectureTheme : CssFile where
   filename := "lecture-theme.css"
-  contents := ⟨include_str "theme.css"⟩
+  contents := ⟨include_str "./theme.css"⟩
 
 def main : IO UInt32 :=
   slidesMain
@@ -22,6 +22,6 @@ def main : IO UInt32 :=
       hash := true
       center := true
       extraCss := #[lectureTheme]
-      outputDir := "lecture-notes/output/lecture-01"
+      outputDir := "lecture-notes/lecture1/output"
     })
-    (doc := %doc Lecture1)
+    (doc := %doc lecture1.lecture1)

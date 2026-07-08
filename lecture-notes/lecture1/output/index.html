@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics in Lean - Lecture 1</title><link rel="stylesheet" href="lib/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="lib/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="lib/reveal.js/dist/theme/white.css">
+    <link rel="stylesheet" href="lib/github.css">
+    <link rel="stylesheet" href="lecture-theme.css">
+    <link rel="stylesheet" href="lib/highlighting.css">
+    <link rel="stylesheet" href="lib/tippy-border.css">
+    <link rel="stylesheet" href="lib/slides-highlight.css">
+    <link rel="stylesheet" href="lib/panel.css">
+    <link rel="stylesheet" href="lib/lightbox.css">
+    <link rel="stylesheet" href="lib/diagram.css">
+    <link rel="stylesheet" href="lib/illuminate-anim.css">
+    <link rel="stylesheet" href="lib/table.css">
+    <link rel="stylesheet" href="lib/katex/dist/katex.min.css">
+    </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-gradient="linear-gradient(135deg, #172554 0%, #1e3a8a 52%, #0f766e 100%)">
+          <h2>
+            Mathematics in Lean</h2>
+          <p class="title-kicker">
+            LECTURE 1</p>
+          <p class="r-fit-text">
+            When is a mathematical statement true?</p>
+          <p>
+            From proofs on paper to proofs checked by a computer.</p>
+          </section>
+        <section>
+          <h2>
+            What is a mathematical statement?</h2>
+          <p>
+            Mathematics is always formulated in the context of a theory. A theory consists of</p>
+          <div class="r-hstack">
+            <p class="fragment fade-up text-box">
+              Basic objects and definitions</p>
+            <p class="fragment fade-up text-box">
+              A set of axioms</p>
+            <p class="fragment fade-up text-box">
+              Rules of inference</p>
+            </div>
+          </section>
+        <section>
+          <h2>
+            The natural numbers</h2>
+          <div class="r-hstack">
+            <p class="fragment fade-up text-box">
+              Positive integers</p>
+            <p class="fragment fade-up text-box">
+              Successor, Addition, Multiplication</p>
+            <p class="fragment fade-up text-box">
+              Peano Axioms</p>
+            </div>
+          <p class="fragment fade-up">
+            <code class="math display">\textbf{Proposition.}\quad \text{For every natural number } n,\; n + 0 = 0 + n \text{ holds.}</code></p>
+          <p class="emphasis-box fragment fade-up">
+            What makes this statment true?</p>
+          </section>
+        <section>
+          <h2>
+            A proof!</h2>
+          <p>
+            A formal proof is a sequence of steps, where each step is either</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                An axiom</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                A known statement</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                The result of applying an inference rule to earlier lines</p>
+              </li>
+            </ul>
+          <p class="emphasis-box fragment fade-up">
+            Goal of the course: Use a computer program to verify mathematical proofs.</p>
+          </section>
+        <section>
+          <h2>
+            Propositions</h2>
+          <p class="fragment fade-up">
+            A proposition is a statement within a theory. A proposition can either have a formal proof or not. If it has a proof, we say the proposition is <em>true</em> or <em>provable</em>.</p>
+          <p class="fragment fade-up">
+            A proposition consists of</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Variables, which are the objects of the theory, <code class="math inline">x, y, z, \dots</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Predicates, which are functions from objects to propositions, <code class="math inline">P(x), Q(y)</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Quantifiers <code class="math inline">\forall</code> and <code class="math inline">\exists</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Logical connectives, which combine propositions into new propositions, <code class="math inline">\wedge, \vee, \to, \neg</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Constants, which are propositions that are by definition provable or not provable, <code class="math inline">\top, \bot</code></p>
+              </li>
+            </ul>
+          </section>
+        <section>
+          <h2>
+            Propositions continued</h2>
+          <p class="fragment fade-up">
+            Let A, B be two propositions. Then</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                <code class="math inline">A \wedge B</code> is provable if and only if both A and B are provable.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                <code class="math inline">A \vee B</code> is provable if and only if at least one of A or B is provable.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                <code class="math inline">A \to B</code> is provable if and only if whenever A is provable, B is provable.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                <code class="math inline">\neg A</code> is defined as <code class="math inline">A \to \bot</code>, i.e. <code class="math inline">\neg A</code> is provable if and only if a proof of A leads to a contradiction.</p>
+              </li>
+            </ul>
+          </section>
+        <section>
+          <h2>
+            Back to the natural numbers</h2>
+          <p>
+            The natural numbers are built from the following operations:</p>
+          <ul>
+            <li>
+              <p>
+                <code class="math inline">0</code> is a natural number;</p>
+              </li>
+            <li>
+              <p>
+                Every natural number <code class="math inline">n</code> has a successor <code class="math inline">S(n)</code>.</p>
+              </li>
+            <li>
+              <p>
+                Every two natural numbers can be added and multiplied together.</p>
+              </li>
+            </ul>
+          <p class="fragment fade-up">
+            These operations follow the following axioms, called the Peano axioms:</p>
+          <div class="r-vstack axiom-grid fragment fade-up">
+            <p>
+              (1) <code class="math inline">∀ n, 0 ≠ S(n)</code></p>
+            <p>
+              (2) <code class="math inline">S(n) = S(m) → n = m</code></p>
+            <p>
+              (3) <code class="math inline">\forall n, n + 0 = n</code></p>
+            <p>
+              (4) <code class="math inline">\forall n ∀ m, n + S(m) = S(n + m)</code></p>
+            <p>
+              (5) <code class="math inline">\forall n, n * 0 = 0</code></p>
+            <p>
+              (6) <code class="math inline">\forall n ∀ m, n * S(m) = n * m + n</code></p>
+            </div>
+          <p class="emphasis-box fragment fade-up">
+            (7) <code class="math inline">P(0) \wedge (\forall n, P(n) \to P(S(n))) \to \forall n, P(n)</code></p>
+          </section>
+        <section>
+          <h2>
+            Example 1</h2>
+          <p>
+            <code class="math inline">\textbf{Proposition 1.}\quad P(n) = n * S(0)= n</code>.</p>
+          <p>
+            Proof:</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Axiom 6 gives <code class="math inline">n * S(0) = n * 0 + n</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Axiom 5 gives <code class="math inline">n * 0 = 0</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                By substitution <code class="math inline">n * S(0) = 0 + n</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Remains to show <code class="math inline">0 + n = n</code>.</p>
+              </li>
+            </ul>
+          </section>
+        <section>
+          <h2>
+            Example 2</h2>
+          <p>
+            <code class="math inline">\textbf{Proposition 2.}\quad Q(n) = 0 + n= n</code>.</p>
+          <p>
+            Proof:</p>
+          <p class="fragment fade-up">
+            Proof by induction (Axiom 7).</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Q(0) = <code class="math inline">0 + 0 = 0</code> is true by axiom 3.</p>
+              </li>
+            </ul>
+          <p class="fragment fade-up">
+            Need to show <code class="math inline">Q(n) \to Q(S(n))</code>.</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Assume Q(n), i.e., <code class="math inline">0 + n = n</code> holds.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Want to show <code class="math inline">Q(S(n)) := 0 + S(n) = S(n)</code>.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Axiom 4 gives <code class="math inline">0 + S(n) = S(0 + n)</code>.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                <code class="math inline">S(0 + n) = S(n)</code> by Q(n).</p>
+              </li>
+            </ul>
+          </section>
+        <section>
+          <h2>
+            Example 3</h2>
+          <p>
+            <code class="math inline">\textbf{Proposition 3.}\quad R(n) = ∀ m, n + m = m + n</code>.</p>
+          <p>
+            Proof:</p>
+          <p class="fragment fade-up">
+            Proof by induction (Axiom 7).</p>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Base case: <code class="math inline">R(0) = \forall m, 0 + m = m + 0</code>, both sides are equal to m by axioms 3 and Example 2.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Induction step: Assume R(n), i.e. <code class="math inline">n + m = m + n</code> for all m. Need to show <code class="math inline">R(S(n)) = S(n) + m = m + S(n)</code> for all m.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Axiom 4 gives <code class="math inline">S(n) + m = S(n + m)</code>.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                By the induction hypothesis, <code class="math inline">S(n + m) = S(m + n)</code>.</p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Axiom 4 gives <code class="math inline">S(m + n) = m + S(n)</code></p>
+              </li>
+            </ul>
+          <ul class="fragment fade-up">
+            <li>
+              <p>
+                Therefore <code class="math inline">S(n) + m = m + S(n)</code> for all m.</p>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    <script src="lib/reveal.js/dist/reveal.js"></script>
+    <script src="lib/reveal.js/plugin/notes/notes.js"></script>
+    <script src="lib/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="lib/katex/dist/katex.min.js"></script>
+    <script src="lib/math.js"></script>
+    <script>
+      
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        slideNumber: true,
+        center: true,
+        transition: 'fade',
+        width: 1280,
+        height: 720,
+        margin: 0.060000,
+        navigationMode: 'default',
+        autoSlide: 0,
+        autoSlideStoppable: true,
+        autoSlideMethod: null,
+        plugins: [ RevealNotes, RevealHighlight ]
+      });
+    </script>
+    <script src="lib/marked.min.js"></script>
+    <script src="lib/popper.js"></script>
+    <script src="lib/tippy.js"></script>
+    <script src="lib/tippy-panel-filter.js"></script>
+    <script src="lib/highlighting.js"></script>
+    <script src="lib/code-block-bg.js"></script>
+    <script src="lib/pretty.js"></script>
+    <script src="lib/panel.js"></script>
+    <script src="lib/lightbox.js"></script>
+    <script src="lib/illuminate-reveal.js"></script>
+    </body>
+  </html>

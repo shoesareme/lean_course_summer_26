@@ -1,0 +1,270 @@
+:root {
+  --ink: #172554;
+  --blue: #2563eb;
+  --blue-dark: #1e40af;
+  --blue-light: #eff6ff;
+  --blue-line: #bfdbfe;
+  --teal: #0f766e;
+  --teal-light: #f0fdfa;
+  --muted: #475569;
+  --line: #cbd5e1;
+}
+
+.reveal {
+  color: var(--ink);
+  font-family: "Source Sans Pro", system-ui, sans-serif;
+  font-size: 30px;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides > section:not(:first-child) {
+  border-top: 5px solid var(--blue);
+  padding-top: 0.5em;
+}
+
+.reveal h1,
+.reveal h2 {
+  color: var(--ink);
+  font-size: 1.42em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 0.55em;
+  text-transform: none;
+}
+
+.reveal p {
+  margin: 0.45em 0;
+}
+
+.reveal p,
+.reveal li {
+  line-height: 1.28;
+}
+
+/* Lists deliberately stay plain throughout the course. */
+.reveal ul {
+  display: block;
+  margin: 0.55em 0;
+  padding-left: 1.35em;
+}
+
+.reveal li {
+  margin: 0.28em 0;
+}
+
+.reveal li::marker {
+  color: var(--blue);
+}
+
+.reveal strong {
+  color: var(--blue-dark);
+}
+
+.reveal .slides > section:first-child,
+.reveal .slides > section:first-child h1,
+.reveal .slides > section:first-child h2 {
+  color: white;
+}
+
+.title-kicker {
+  color: #bfdbfe;
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin-bottom: 1.1em;
+}
+
+.present[data-background-gradient] {
+  color: white;
+}
+
+.reveal .slide-number {
+  background: transparent;
+  color: #64748b;
+}
+
+/* Standard box layouts: up to three across, larger groups in one column. */
+.reveal .r-hstack:has(> .text-box),
+.reveal .r-hstack:has(> .emphasis-box) {
+  align-items: stretch;
+  display: flex;
+  gap: 0.8em;
+  justify-content: center;
+  margin: 0.7em 0;
+  width: 100%;
+}
+
+.reveal .r-hstack > .text-box,
+.reveal .r-hstack > .emphasis-box {
+  flex: 1 1 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.reveal .box-stack,
+.reveal .box-stack > .r-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  margin: 0.55em auto;
+  width: min(100%, 980px);
+}
+
+.reveal .box-stack > .r-vstack {
+  margin: 0;
+  width: 100%;
+}
+
+.reveal .axiom-grid {
+  display: grid;
+  gap: 0.55em 0.65em;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0.55em 0;
+  width: 100%;
+}
+
+/* The one standard text box. */
+.reveal .text-box,
+.reveal .box-stack p,
+.reveal .axiom-grid p {
+  align-items: center;
+  background: var(--blue-light);
+  border: 1px solid var(--blue-line);
+  border-radius: 12px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  max-width: 100%;
+  min-height: 3.25em;
+  min-width: 0;
+  overflow-wrap: break-word;
+  padding: 0.65em 0.8em;
+  text-align: center;
+  text-wrap: pretty;
+  white-space: normal;
+}
+
+.reveal .box-stack p,
+.reveal .axiom-grid p {
+  min-height: 0;
+  padding: 0.38em 0.7em;
+}
+
+.reveal .text-box > .vstack {
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal .text-box p,
+.reveal .emphasis-box p {
+  margin: 0.2em 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
+  text-wrap: pretty;
+  white-space: normal;
+}
+
+/* The one emphasis box. */
+.reveal .emphasis-box {
+  align-items: center;
+  background: var(--teal-light);
+  border: 0;
+  border-left: 6px solid var(--teal);
+  border-radius: 0 10px 10px 0;
+  box-sizing: border-box;
+  color: var(--ink);
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  margin: 0.7em 0;
+  min-height: 3.25em;
+  padding: 0.7em 0.9em;
+  text-align: center;
+}
+
+.reveal .emphasis-box strong,
+.reveal .emphasis-box em,
+.reveal .emphasis-box code {
+  color: var(--ink);
+}
+
+.reveal .arrow {
+  align-items: center;
+  color: var(--blue-dark);
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  margin: 0 0.15em;
+}
+
+.reveal pre {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 9%);
+  margin: 0.6em 0;
+}
+
+.reveal code {
+  font-size: 0.9em;
+}
+
+.reveal table {
+  border-collapse: collapse;
+  font-size: 0.86em;
+  overflow: hidden;
+  width: 100%;
+}
+
+.reveal table th {
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.reveal table th,
+.reveal table td {
+  border-color: var(--blue-line);
+  padding: 0.42em 0.62em;
+  vertical-align: middle;
+}
+
+.reveal ol {
+  display: block;
+  margin: 0.55em 0;
+  padding-left: 1.55em;
+}
+
+.reveal ol li::marker {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.reveal .closing-list {
+  background: var(--blue-light);
+  border: 1px solid var(--blue-line);
+  border-radius: 12px;
+  padding: 0.55em 0.85em;
+}
+
+.reveal .closing-list ol {
+  margin: 0;
+}
+
+/* A few dense slides need smaller type, but no special visual treatment. */
+.reveal .slides > section:nth-child(5),
+.reveal .slides > section:nth-child(6),
+.reveal .slides > section:nth-child(9),
+.reveal .slides > section:nth-child(10) {
+  font-size: 0.84em;
+}
+
+.reveal .slides > section:nth-child(8),
+.reveal .slides > section:nth-child(11) {
+  font-size: 0.76em;
+}
