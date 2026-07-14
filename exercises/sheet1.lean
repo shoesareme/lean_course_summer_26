@@ -1,17 +1,40 @@
 import Std
 
-import Mathlib.Tactic.Use
+import Mathlib.Tactic
 
 section
 
 variable {P Q : Prop}
 
 theorem exercise1 : (¬(P ∧ Q) ↔ ¬ P ∨ ¬ Q) := by
-  sorry
-
+  constructor
+  -- for the first part of the proof I was not aware we were able to use tactics like by_contra, so the code is needlessly complicated.
+  · intro h1
+    by_cases h : ¬P ∨ ¬Q
+    · exact h
+    · left
+      intro hp
+      by_cases hq : Q
+      · have hpq := h1 ⟨hp, hq⟩
+        exact hpq
+      · have hnpornq : ¬ P ∨ ¬ Q := by
+          right
+          exact hq
+        have hf := h hnpornq
+        exact hf
+  · intro h1
+    intro h2
+    have hp := And.left h2
+    have hq := And.right h2
+    rcases h1 with hn1 | hn2
+    · exact hn1 hp
+    · exact hn2 hq
 
 theorem exercise2 (h : P ∨ Q) (hp : ¬ P) : Q := by
-  sorry
+  rcases h with hp1 | hq
+  · apply hp at hp1
+    cases hp1
+  · exact hq
 
 end
 
@@ -39,7 +62,8 @@ theorem theorem_we_want_to_use (x : T) : P x := by
   sorry -- use this theorem to prove exercise4
 
 theorem exercise4 : ∀ x, P x := by
-  sorry
+  intro x
+  exact theorem_we_want_to_use x
 
 
 /-
@@ -51,7 +75,8 @@ x : T and changing the goal to P x.
 -/
 
 theorem exercise5 (h : ∀ x, P x) (y : T) : ∃ y, P y := by
-  sorry
+  have htemp := h y
+  use y
 
 
 /-
@@ -61,7 +86,12 @@ a witness x : T and a proof h' : P x.
 
 theorem exercise6 (n : Nat) (h : ∃ k, n = 2 * k) : ∃ l, n*n = 4 * l := by
   rcases h with ⟨k, hk⟩
-  sorry -- complete the proof from here, remember the natural number game.
-
-
+  use k*k
+  rw [← mul_assoc]
+  rw [hk]
+  rw [← mul_assoc]
+  nth_rewrite 2 [mul_comm]
+  rw [← mul_assoc]
+  have h224 : 2 * 2 = 4 := by decide
+  rw [h224]
 end
