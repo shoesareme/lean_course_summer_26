@@ -23,7 +23,13 @@ abbrev remainder (n p : ℕ) : ℕ := (maxPowDvdDiv p n).2
 
 /-
 Lecture lemma 1: the largest power of `p` occurring in `n` divides `n`.
+The lemma is a useful reformulation of exercise 1.
 -/
+lemma product_of_primeExponent (n p : ℕ) :
+    n = p ^ primeExponent n p * remainder n p := by
+    sorry
+
+
 theorem exercise1 (p n : ℕ) :
     p ^ primeExponent n p ∣ n := by
   sorry
@@ -50,6 +56,30 @@ theorem exercise3 {p n : ℕ} (hp : p.Prime) (hn : n ≠ 0) :
 Lecture lemma 4: removing the largest power of `q` does not change the exponent
 of a different prime `p`.
 -/
+
+/-
+Start by using the first lemma to prove the other lemmas. (You can use simp? and exact?)
+-/
+
+lemma padicValNat_mul (n m p : ℕ) (hm : m ≠ 0) (hn : n ≠ 0) (hp : p.Prime) :
+  padicValNat p (m * n) = padicValNat p m + padicValNat p n := by
+  refine @padicValNat.mul _ _ _ ?_ hm hn
+  exact { out := hp }
+
+lemma primeExponent_mul {n m p : ℕ} (hm : m ≠ 0) (hn : n ≠ 0) (hp : p.Prime) :
+    primeExponent (m * n) p = primeExponent m p + primeExponent n p := by
+  sorry
+
+lemma primeExponent_coprime {n p : ℕ} (hcoprime : ¬p ∣ n) :
+    primeExponent n p = 0 := by
+  sorry
+
+/- a useful result from the library, it is a reformulation of the fact that the prime exponent
+is the largest power of p that divides n.
+-/
+
+#check pow_dvd_iff_le_padicValNat
+
 theorem exercise4 {p q n : ℕ} (hp : p.Prime) (hq : q.Prime) (hpq : p ≠ q)
     (hn : n ≠ 0) :
     primeExponent n p = primeExponent (remainder n q) p := by
