@@ -32,7 +32,8 @@ lemma product_of_primeExponent (n p : ℕ) :
 
 theorem exercise1 (p n : ℕ) :
     p ^ primeExponent n p ∣ n := by
-  sorry
+  use remainder n p
+  exact product_of_primeExponent n p
 
 /-
 Lecture lemma 2: after removing the largest power of `q`, every prime divisor of
